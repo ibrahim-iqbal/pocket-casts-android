@@ -65,7 +65,7 @@ fun <T> TvRow(
     ) {
         Text(
             text = title,
-            color = Color.White,
+            color = TvColors.TextPrimary,
             style = TextStyle(
                 fontSize = titleSize.sp,
                 fontWeight = FontWeight(510),
@@ -115,7 +115,7 @@ fun <T> TvRow(
 private fun TvRowPreview() {
     AppTheme(themeType = Theme.ThemeType.EXTRA_DARK) {
         MaterialTheme {
-            Box(modifier = Modifier.background(TvColors.Dark)) {
+            Box(modifier = Modifier.background(TvColors.BackgroundSunken)) {
                 TvRow(
                     title = "Recently Played",
                     items = (1..8).toList(),
