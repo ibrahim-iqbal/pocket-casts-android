@@ -39,8 +39,9 @@ import au.com.shiftyjelly.pocketcasts.compose.loading.LoadingView
 import au.com.shiftyjelly.pocketcasts.localization.helper.RelativeDateFormatter
 import au.com.shiftyjelly.pocketcasts.localization.helper.TimeHelper
 import au.com.shiftyjelly.pocketcasts.models.entity.PodcastEpisode
-import au.com.shiftyjelly.pocketcasts.theme.TvColors
-import au.com.shiftyjelly.pocketcasts.theme.TvTextStyles
+import au.com.shiftyjelly.pocketcasts.theme.TvTheme
+import au.com.shiftyjelly.pocketcasts.theme.tvColors
+import au.com.shiftyjelly.pocketcasts.theme.tvTypography
 import au.com.shiftyjelly.pocketcasts.ui.theme.Theme
 import java.util.Date
 import au.com.shiftyjelly.pocketcasts.localization.R as LR
@@ -73,7 +74,7 @@ private fun TvUpNextContent(
     Box(modifier = modifier.fillMaxSize()) {
         when (uiState) {
             is TvUpNextUiState.Loading -> {
-                LoadingView(color = TvColors.TextPrimary, modifier = Modifier.fillMaxSize())
+                LoadingView(color = MaterialTheme.tvColors.textPrimary, modifier = Modifier.fillMaxSize())
             }
 
             is TvUpNextUiState.Empty -> {
@@ -156,13 +157,13 @@ private fun UpNextHeader(
     ) {
         Text(
             text = stringResource(LR.string.up_next),
-            style = TvTextStyles.Title3,
-            color = TvColors.TextPrimary,
+            style = MaterialTheme.tvTypography.title3,
+            color = MaterialTheme.tvColors.textPrimary,
         )
         Text(
             text = episodeSummaryText(episodes),
-            style = TvTextStyles.Caption2,
-            color = TvColors.TextSecondary,
+            style = MaterialTheme.tvTypography.caption2,
+            color = MaterialTheme.tvColors.textSecondary,
         )
     }
 }
@@ -198,8 +199,8 @@ private const val ROW_WIDTH_FRACTION = 0.75f
 @Composable
 private fun TvUpNextLoadedPreview() {
     AppTheme(themeType = Theme.ThemeType.EXTRA_DARK) {
-        MaterialTheme {
-            Box(modifier = Modifier.background(TvColors.BackgroundSunken)) {
+        TvTheme {
+            Box(modifier = Modifier.background(MaterialTheme.tvColors.backgroundSunken)) {
                 TvUpNextContent(
                     uiState = TvUpNextUiState.Loaded(
                         episodes = List(4) { index ->
@@ -223,8 +224,8 @@ private fun TvUpNextLoadedPreview() {
 @Composable
 private fun TvUpNextEmptyPreview() {
     AppTheme(themeType = Theme.ThemeType.EXTRA_DARK) {
-        MaterialTheme {
-            Box(modifier = Modifier.background(TvColors.BackgroundSunken)) {
+        TvTheme {
+            Box(modifier = Modifier.background(MaterialTheme.tvColors.backgroundSunken)) {
                 TvUpNextContent(
                     uiState = TvUpNextUiState.Empty,
                     onNavigateToHome = {},

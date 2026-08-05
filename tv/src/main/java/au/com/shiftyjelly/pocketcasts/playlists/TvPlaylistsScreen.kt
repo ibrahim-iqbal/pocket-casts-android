@@ -50,7 +50,6 @@ import au.com.shiftyjelly.pocketcasts.component.HideTvTopBar
 import au.com.shiftyjelly.pocketcasts.component.TvEmptyState
 import au.com.shiftyjelly.pocketcasts.component.TvPlaylistCard
 import au.com.shiftyjelly.pocketcasts.component.TvPlaylistCardColors
-import au.com.shiftyjelly.pocketcasts.compose.AppTheme
 import au.com.shiftyjelly.pocketcasts.compose.loading.LoadingView
 import au.com.shiftyjelly.pocketcasts.models.to.PlaylistIcon
 import au.com.shiftyjelly.pocketcasts.models.type.SmartRules
@@ -60,9 +59,9 @@ import au.com.shiftyjelly.pocketcasts.repositories.playlist.Playlist
 import au.com.shiftyjelly.pocketcasts.repositories.playlist.PlaylistPreview
 import au.com.shiftyjelly.pocketcasts.repositories.playlist.SmartPlaylistPreview
 import au.com.shiftyjelly.pocketcasts.theme.TvButtonDefaults
-import au.com.shiftyjelly.pocketcasts.theme.TvColors
-import au.com.shiftyjelly.pocketcasts.theme.TvTextStyles
-import au.com.shiftyjelly.pocketcasts.ui.theme.Theme
+import au.com.shiftyjelly.pocketcasts.theme.TvTheme
+import au.com.shiftyjelly.pocketcasts.theme.tvColors
+import au.com.shiftyjelly.pocketcasts.theme.tvTypography
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import au.com.shiftyjelly.pocketcasts.localization.R as LR
@@ -153,7 +152,7 @@ private fun TvPlaylistsContent(
         modifier = modifier,
     ) { state ->
         when (state) {
-            is TvPlaylistsUiState.Loading -> LoadingView(color = TvColors.TextPrimary, modifier = Modifier.fillMaxSize())
+            is TvPlaylistsUiState.Loading -> LoadingView(color = MaterialTheme.tvColors.textPrimary, modifier = Modifier.fillMaxSize())
 
             is TvPlaylistsUiState.Loaded -> if (state.playlists.isEmpty()) {
                 TvPlaylistsEmpty(
@@ -190,8 +189,8 @@ private fun TvPlaylistsGrid(
     Column(modifier = modifier.padding(horizontal = 32.dp)) {
         Text(
             text = stringResource(LR.string.playlists),
-            style = TvTextStyles.Title3,
-            color = TvColors.TextPrimary,
+            style = MaterialTheme.tvTypography.title3,
+            color = MaterialTheme.tvColors.textPrimary,
             modifier = Modifier.padding(top = 8.dp, bottom = 26.dp),
         )
         var lastFocusedIndex by rememberSaveable(playlists) { mutableIntStateOf(0) }
@@ -290,22 +289,20 @@ private fun TvPlaylistsEmpty(
 @Preview(device = Devices.TV_1080p)
 @Composable
 private fun TvPlaylistsGridPreview() {
-    AppTheme(themeType = Theme.ThemeType.EXTRA_DARK) {
-        MaterialTheme {
-            Box(modifier = Modifier.background(TvColors.BackgroundSunken)) {
-                TvPlaylistsContent(
-                    uiState = TvPlaylistsUiState.Loaded(
-                        playlists = List(5) { index -> previewPlaylist(index) },
-                    ),
-                    getArtworkUuidsFlow = { MutableStateFlow(listOf("podcast-1", "podcast-2")) },
-                    getEpisodeCountFlow = { MutableStateFlow(42) },
-                    refreshArtworkUuids = {},
-                    refreshEpisodeCount = {},
-                    findPodcastTint = { null },
-                    onCreatePlaylist = {},
-                    onOpenPlaylist = {},
-                )
-            }
+    TvTheme {
+        Box(modifier = Modifier.background(MaterialTheme.tvColors.backgroundSunken)) {
+            TvPlaylistsContent(
+                uiState = TvPlaylistsUiState.Loaded(
+                    playlists = List(5) { index -> previewPlaylist(index) },
+                ),
+                getArtworkUuidsFlow = { MutableStateFlow(listOf("podcast-1", "podcast-2")) },
+                getEpisodeCountFlow = { MutableStateFlow(42) },
+                refreshArtworkUuids = {},
+                refreshEpisodeCount = {},
+                findPodcastTint = { null },
+                onCreatePlaylist = {},
+                onOpenPlaylist = {},
+            )
         }
     }
 }
@@ -313,20 +310,18 @@ private fun TvPlaylistsGridPreview() {
 @Preview(device = Devices.TV_1080p)
 @Composable
 private fun TvPlaylistsEmptyPreview() {
-    AppTheme(themeType = Theme.ThemeType.EXTRA_DARK) {
-        MaterialTheme {
-            Box(modifier = Modifier.background(TvColors.BackgroundSunken)) {
-                TvPlaylistsContent(
-                    uiState = TvPlaylistsUiState.Loaded(playlists = emptyList()),
-                    getArtworkUuidsFlow = { MutableStateFlow(null) },
-                    getEpisodeCountFlow = { MutableStateFlow(null) },
-                    refreshArtworkUuids = {},
-                    refreshEpisodeCount = {},
-                    findPodcastTint = { null },
-                    onCreatePlaylist = {},
-                    onOpenPlaylist = {},
-                )
-            }
+    TvTheme {
+        Box(modifier = Modifier.background(MaterialTheme.tvColors.backgroundSunken)) {
+            TvPlaylistsContent(
+                uiState = TvPlaylistsUiState.Loaded(playlists = emptyList()),
+                getArtworkUuidsFlow = { MutableStateFlow(null) },
+                getEpisodeCountFlow = { MutableStateFlow(null) },
+                refreshArtworkUuids = {},
+                refreshEpisodeCount = {},
+                findPodcastTint = { null },
+                onCreatePlaylist = {},
+                onOpenPlaylist = {},
+            )
         }
     }
 }
