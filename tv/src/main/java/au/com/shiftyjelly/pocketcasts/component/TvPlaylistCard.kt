@@ -39,10 +39,9 @@ import androidx.tv.material3.CardDefaults
 import androidx.tv.material3.Glow
 import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.Text
-import au.com.shiftyjelly.pocketcasts.compose.AppTheme
-import au.com.shiftyjelly.pocketcasts.theme.TvColors
-import au.com.shiftyjelly.pocketcasts.theme.TvTextStyles
-import au.com.shiftyjelly.pocketcasts.ui.theme.Theme
+import au.com.shiftyjelly.pocketcasts.theme.TvTheme
+import au.com.shiftyjelly.pocketcasts.theme.tvColors
+import au.com.shiftyjelly.pocketcasts.theme.tvTypography
 import au.com.shiftyjelly.pocketcasts.localization.R as LR
 
 @Composable
@@ -59,17 +58,17 @@ fun TvPlaylistCard(
     val isFocused by interactionSource.collectIsFocusedAsState()
 
     val backgroundColor by animateColorAsState(
-        targetValue = if (isFocused) TvColors.BackgroundActive else cardColor,
+        targetValue = if (isFocused) MaterialTheme.tvColors.backgroundActive else cardColor,
         animationSpec = tween(durationMillis = 200),
         label = "PlaylistCardBackground",
     )
     val titleColor by animateColorAsState(
-        targetValue = if (isFocused) TvColors.TextPrimaryActive else TvColors.TextPrimary,
+        targetValue = if (isFocused) MaterialTheme.tvColors.textPrimaryActive else MaterialTheme.tvColors.textPrimary,
         animationSpec = tween(durationMillis = 200),
         label = "PlaylistCardTitleColor",
     )
     val captionColor by animateColorAsState(
-        targetValue = if (isFocused) TvColors.TextSecondaryActive else TvColors.TextSecondary,
+        targetValue = if (isFocused) MaterialTheme.tvColors.textSecondaryActive else MaterialTheme.tvColors.textSecondary,
         animationSpec = tween(durationMillis = 200),
         label = "PlaylistCardCaptionColor",
     )
@@ -106,7 +105,7 @@ fun TvPlaylistCard(
             ) {
                 Text(
                     text = title,
-                    style = TvTextStyles.Headline,
+                    style = MaterialTheme.tvTypography.headline,
                     color = titleColor,
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis,
@@ -115,7 +114,7 @@ fun TvPlaylistCard(
                     Spacer(modifier = Modifier.height(4.dp))
                     Text(
                         text = stringResource(LR.string.smart_playlist),
-                        style = TvTextStyles.Caption2,
+                        style = MaterialTheme.tvTypography.caption2,
                         color = captionColor,
                     )
                 }
@@ -123,7 +122,7 @@ fun TvPlaylistCard(
                 if (episodeCount != null) {
                     Text(
                         text = pluralStringResource(LR.plurals.episode_count, episodeCount, episodeCount),
-                        style = TvTextStyles.Caption2,
+                        style = MaterialTheme.tvTypography.caption2,
                         color = captionColor,
                     )
                 }
@@ -221,18 +220,16 @@ private fun PlaylistCover(
 @Preview(device = Devices.TV_1080p)
 @Composable
 private fun TvPlaylistCardPreview() {
-    AppTheme(themeType = Theme.ThemeType.EXTRA_DARK) {
-        MaterialTheme {
-            Box(modifier = Modifier.background(TvColors.BackgroundSunken).padding(32.dp)) {
-                TvPlaylistCard(
-                    title = "New Releases",
-                    isSmartPlaylist = true,
-                    episodeCount = 24,
-                    artworkUrls = listOf("", ""),
-                    cardColor = TvPlaylistCardColors.cardColor(podcastTint = null, seed = "new-releases"),
-                    onClick = {},
-                )
-            }
+    TvTheme {
+        Box(modifier = Modifier.background(MaterialTheme.tvColors.backgroundSunken).padding(32.dp)) {
+            TvPlaylistCard(
+                title = "New Releases",
+                isSmartPlaylist = true,
+                episodeCount = 24,
+                artworkUrls = listOf("", ""),
+                cardColor = TvPlaylistCardColors.cardColor(podcastTint = null, seed = "new-releases"),
+                onClick = {},
+            )
         }
     }
 }
