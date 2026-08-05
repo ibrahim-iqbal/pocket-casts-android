@@ -36,10 +36,9 @@ import androidx.tv.material3.TabDefaults
 import androidx.tv.material3.TabRow
 import androidx.tv.material3.TabRowDefaults
 import androidx.tv.material3.Text
-import au.com.shiftyjelly.pocketcasts.compose.AppTheme
-import au.com.shiftyjelly.pocketcasts.theme.TvColors
-import au.com.shiftyjelly.pocketcasts.theme.TvTextStyles
-import au.com.shiftyjelly.pocketcasts.ui.theme.Theme
+import au.com.shiftyjelly.pocketcasts.theme.TvTheme
+import au.com.shiftyjelly.pocketcasts.theme.tvColors
+import au.com.shiftyjelly.pocketcasts.theme.tvTypography
 
 @Composable
 fun TvTabBar(
@@ -61,7 +60,7 @@ fun TvTabBar(
 
     Box(
         modifier = modifier
-            .background(TvColors.BackgroundSunken, RoundedCornerShape(percent = 50))
+            .background(MaterialTheme.tvColors.backgroundSunken, RoundedCornerShape(percent = 50))
             .padding(3.dp),
     ) {
         TabRow(
@@ -73,8 +72,8 @@ fun TvTabBar(
                     TabRowDefaults.PillIndicator(
                         currentTabPosition = currentTabPosition,
                         doesTabRowHaveFocus = doesTabRowHaveFocus,
-                        activeColor = TvColors.BackgroundActive,
-                        inactiveColor = TvColors.BackgroundActive,
+                        activeColor = MaterialTheme.tvColors.backgroundActive,
+                        inactiveColor = MaterialTheme.tvColors.backgroundActive,
                     )
                 }
             },
@@ -88,11 +87,11 @@ fun TvTabBar(
                         .padding(horizontal = 21.dp)
                         .then(if (index == selectedTabIndex) Modifier.focusRequester(focusRequester) else Modifier),
                     colors = TabDefaults.pillIndicatorTabColors(
-                        contentColor = TvColors.TextPrimary,
-                        selectedContentColor = TvColors.TextPrimaryActive,
-                        focusedContentColor = TvColors.TextPrimary,
-                        focusedSelectedContentColor = TvColors.TextPrimaryActive,
-                        inactiveContentColor = TvColors.TextPrimary,
+                        contentColor = MaterialTheme.tvColors.textPrimary,
+                        selectedContentColor = MaterialTheme.tvColors.textPrimaryActive,
+                        focusedContentColor = MaterialTheme.tvColors.textPrimary,
+                        focusedSelectedContentColor = MaterialTheme.tvColors.textPrimaryActive,
+                        inactiveContentColor = MaterialTheme.tvColors.textPrimary,
                     ),
                 ) {
                     Box(
@@ -104,7 +103,7 @@ fun TvTabBar(
                                 Text(
                                     text = stringResource(tab.labelRes),
                                     color = LocalContentColor.current,
-                                    style = TvTextStyles.Caption1,
+                                    style = MaterialTheme.tvTypography.caption1,
                                 )
                             }
 
@@ -127,7 +126,7 @@ fun TvTabBar(
                                     Text(
                                         text = stringResource(tab.labelRes),
                                         color = LocalContentColor.current,
-                                        style = TvTextStyles.Caption1,
+                                        style = MaterialTheme.tvTypography.caption1,
                                     )
                                 }
                             }
@@ -142,42 +141,36 @@ fun TvTabBar(
 @Preview(device = Devices.TV_1080p, showBackground = true)
 @Composable
 private fun TvTabBarPreview() {
-    AppTheme(themeType = Theme.ThemeType.EXTRA_DARK) {
-        MaterialTheme {
-            var selectedIndex by remember { mutableIntStateOf(1) }
-            TvTabBar(
-                tabs = TvTab.entries,
-                selectedTabIndex = selectedIndex,
-                onTabSelect = { selectedIndex = it },
-            )
-        }
+    TvTheme {
+        var selectedIndex by remember { mutableIntStateOf(1) }
+        TvTabBar(
+            tabs = TvTab.entries,
+            selectedTabIndex = selectedIndex,
+            onTabSelect = { selectedIndex = it },
+        )
     }
 }
 
 @Preview(device = Devices.TV_1080p, showBackground = true)
 @Composable
 private fun TvTabBarFirstSelectedPreview() {
-    AppTheme(themeType = Theme.ThemeType.EXTRA_DARK) {
-        MaterialTheme {
-            TvTabBar(
-                tabs = TvTab.entries,
-                selectedTabIndex = 0,
-                onTabSelect = {},
-            )
-        }
+    TvTheme {
+        TvTabBar(
+            tabs = TvTab.entries,
+            selectedTabIndex = 0,
+            onTabSelect = {},
+        )
     }
 }
 
 @Preview(device = Devices.TV_1080p, showBackground = true)
 @Composable
 private fun TvTabBarSearchSelectedPreview() {
-    AppTheme(themeType = Theme.ThemeType.EXTRA_DARK) {
-        MaterialTheme {
-            TvTabBar(
-                tabs = TvTab.entries,
-                selectedTabIndex = 4,
-                onTabSelect = {},
-            )
-        }
+    TvTheme {
+        TvTabBar(
+            tabs = TvTab.entries,
+            selectedTabIndex = 4,
+            onTabSelect = {},
+        )
     }
 }

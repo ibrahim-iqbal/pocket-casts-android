@@ -33,11 +33,10 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.tv.material3.MaterialTheme
 import au.com.shiftyjelly.pocketcasts.component.LocalTvTopBarVisibility
 import au.com.shiftyjelly.pocketcasts.component.TvTopBarVisibility
-import au.com.shiftyjelly.pocketcasts.compose.AppTheme
 import au.com.shiftyjelly.pocketcasts.playlists.TvPlaylistsScreen
 import au.com.shiftyjelly.pocketcasts.podcasts.TvYourPodcastsScreen
-import au.com.shiftyjelly.pocketcasts.theme.TvColors
-import au.com.shiftyjelly.pocketcasts.ui.theme.Theme
+import au.com.shiftyjelly.pocketcasts.theme.TvTheme
+import au.com.shiftyjelly.pocketcasts.theme.tvColors
 import au.com.shiftyjelly.pocketcasts.upnext.TvUpNextScreen
 
 @Composable
@@ -133,8 +132,8 @@ private fun TvScaffoldContent(
             .background(
                 Brush.horizontalGradient(
                     colors = listOf(
-                        TvColors.BackgroundBase,
-                        TvColors.BackgroundSunken,
+                        MaterialTheme.tvColors.backgroundBase,
+                        MaterialTheme.tvColors.backgroundSunken,
                     ),
                 ),
             ),
@@ -185,19 +184,17 @@ private val HIDDEN_TOP_BAR_PADDING = 32.dp
 @Preview(device = Devices.TV_1080p)
 @Composable
 private fun TvScaffoldPreview() {
-    AppTheme(themeType = Theme.ThemeType.EXTRA_DARK) {
-        MaterialTheme {
-            var selectedIndex by remember { mutableIntStateOf(0) }
-            TvScaffoldContent(
-                tabs = TvTab.entries,
-                selectedTabIndex = selectedIndex,
-                profile = TvProfileState.SignedOut,
-                isTopBarVisible = true,
-                onTabSelect = { selectedIndex = it },
-                onProfileClick = {},
-            ) { tab ->
-                TvTabPlaceholder(tab = tab)
-            }
+    TvTheme {
+        var selectedIndex by remember { mutableIntStateOf(0) }
+        TvScaffoldContent(
+            tabs = TvTab.entries,
+            selectedTabIndex = selectedIndex,
+            profile = TvProfileState.SignedOut,
+            isTopBarVisible = true,
+            onTabSelect = { selectedIndex = it },
+            onProfileClick = {},
+        ) { tab ->
+            TvTabPlaceholder(tab = tab)
         }
     }
 }
