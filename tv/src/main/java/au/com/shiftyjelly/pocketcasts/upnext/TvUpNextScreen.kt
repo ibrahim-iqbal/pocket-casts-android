@@ -78,7 +78,7 @@ private fun TvUpNextContent(
     Box(modifier = modifier.fillMaxSize()) {
         when (uiState) {
             is TvUpNextUiState.Loading -> {
-                LoadingView(color = Color.White, modifier = Modifier.fillMaxSize())
+                LoadingView(color = TvColors.TextPrimary, modifier = Modifier.fillMaxSize())
             }
 
             is TvUpNextUiState.Empty -> {
@@ -161,12 +161,12 @@ private fun UpNextHeader(
     ) {
         Text(
             text = stringResource(LR.string.up_next),
-            style = TvTextStyles.ScreenTitle,
-            color = Color.White,
+            style = TvTextStyles.Title3,
+            color = TvColors.TextPrimary,
         )
         Text(
             text = episodeSummaryText(episodes),
-            style = TvTextStyles.PlaylistCardCaption,
+            style = TvTextStyles.Caption2,
             color = TvColors.TextSecondary,
         )
     }
@@ -195,8 +195,8 @@ private fun UpNextEmpty(
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Text(
                 text = stringResource(LR.string.tv_up_next_empty_title),
-                style = TvTextStyles.ScreenTitle,
-                color = Color.White,
+                style = TvTextStyles.Title3,
+                color = TvColors.TextPrimary,
                 textAlign = TextAlign.Center,
             )
             Spacer(modifier = Modifier.height(12.dp))
@@ -225,7 +225,7 @@ private const val ROW_WIDTH_FRACTION = 0.75f
 private fun TvUpNextLoadedPreview() {
     AppTheme(themeType = Theme.ThemeType.EXTRA_DARK) {
         MaterialTheme {
-            Box(modifier = Modifier.background(TvColors.Dark)) {
+            Box(modifier = Modifier.background(TvColors.BackgroundSunken)) {
                 TvUpNextContent(
                     uiState = TvUpNextUiState.Loaded(
                         episodes = List(4) { index ->
@@ -250,7 +250,7 @@ private fun TvUpNextLoadedPreview() {
 private fun TvUpNextEmptyPreview() {
     AppTheme(themeType = Theme.ThemeType.EXTRA_DARK) {
         MaterialTheme {
-            Box(modifier = Modifier.background(TvColors.Dark)) {
+            Box(modifier = Modifier.background(TvColors.BackgroundSunken)) {
                 TvUpNextContent(
                     uiState = TvUpNextUiState.Empty,
                     onNavigateToHome = {},
