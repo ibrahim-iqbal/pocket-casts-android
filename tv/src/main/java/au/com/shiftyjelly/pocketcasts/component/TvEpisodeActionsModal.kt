@@ -17,12 +17,11 @@ import androidx.compose.ui.unit.dp
 import androidx.tv.material3.Button
 import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.Text
-import au.com.shiftyjelly.pocketcasts.compose.AppTheme
 import au.com.shiftyjelly.pocketcasts.models.entity.PodcastEpisode
 import au.com.shiftyjelly.pocketcasts.models.type.EpisodePlayingStatus
 import au.com.shiftyjelly.pocketcasts.theme.TvButtonDefaults
-import au.com.shiftyjelly.pocketcasts.theme.TvTextStyles
-import au.com.shiftyjelly.pocketcasts.ui.theme.Theme
+import au.com.shiftyjelly.pocketcasts.theme.TvTheme
+import au.com.shiftyjelly.pocketcasts.theme.tvTypography
 import java.util.Date
 import au.com.shiftyjelly.pocketcasts.localization.R as LR
 
@@ -115,7 +114,7 @@ private fun TvEpisodeActionButton(
     ) {
         Text(
             text = text,
-            style = TvTextStyles.Caption1.copy(textAlign = TextAlign.Center),
+            style = MaterialTheme.tvTypography.caption1.copy(textAlign = TextAlign.Center),
             modifier = Modifier.fillMaxWidth(),
         )
     }
@@ -151,16 +150,14 @@ private fun TvEpisodeActionsModalPlayedArchivedPreview() {
 
 @Composable
 private fun TvEpisodeActionsModalPreviewContent(episode: PodcastEpisode) {
-    AppTheme(themeType = Theme.ThemeType.EXTRA_DARK) {
-        MaterialTheme {
-            CompositionLocalProvider(LocalTvToastHostState provides remember { TvToastHostState() }) {
-                TvModalSurface(contentPadding = ContentPadding) {
-                    TvEpisodeActionsModalContent(
-                        episode = episode,
-                        onDismissRequest = {},
-                        onShowEpisodeDetails = {},
-                    )
-                }
+    TvTheme {
+        CompositionLocalProvider(LocalTvToastHostState provides remember { TvToastHostState() }) {
+            TvModalSurface(contentPadding = ContentPadding) {
+                TvEpisodeActionsModalContent(
+                    episode = episode,
+                    onDismissRequest = {},
+                    onShowEpisodeDetails = {},
+                )
             }
         }
     }
