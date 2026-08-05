@@ -221,7 +221,7 @@ private fun AllEpisodesArchived(
     ) {
         Text(
             text = pluralStringResource(LR.plurals.tv_playlist_all_archived, episodeCount, episodeCount),
-            style = MaterialTheme.typography.bodyLarge,
+            style = MaterialTheme.tvTypography.caption1,
             color = MaterialTheme.tvColors.textSecondary,
             textAlign = TextAlign.Center,
             modifier = Modifier.widthIn(max = 400.dp),
@@ -303,7 +303,7 @@ private fun NoEpisodes(
                     Playlist.Type.Manual -> stringResource(LR.string.tv_playlist_empty_subtitle_manual)
                     Playlist.Type.Smart -> stringResource(LR.string.tv_playlist_empty_subtitle)
                 },
-                style = MaterialTheme.typography.bodyLarge,
+                style = MaterialTheme.tvTypography.caption1,
                 color = MaterialTheme.tvColors.textSecondary,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.widthIn(max = 400.dp),

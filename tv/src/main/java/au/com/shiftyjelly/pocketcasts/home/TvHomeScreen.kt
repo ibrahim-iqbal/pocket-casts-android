@@ -36,6 +36,7 @@ import au.com.shiftyjelly.pocketcasts.compose.loading.LoadingView
 import au.com.shiftyjelly.pocketcasts.podcasts.TvPodcastDetailsScreen
 import au.com.shiftyjelly.pocketcasts.theme.TvTheme
 import au.com.shiftyjelly.pocketcasts.theme.tvColors
+import au.com.shiftyjelly.pocketcasts.theme.tvTypography
 import au.com.shiftyjelly.pocketcasts.localization.R as LR
 
 @Composable
@@ -98,7 +99,7 @@ private fun TvHomeError(
             Text(
                 text = stringResource(LR.string.error_generic_message),
                 color = MaterialTheme.tvColors.textPrimary,
-                style = MaterialTheme.typography.bodyLarge,
+                style = MaterialTheme.tvTypography.caption1,
             )
             Spacer(modifier = Modifier.height(24.dp))
             OutlinedButton(onClick = onRetry) {
