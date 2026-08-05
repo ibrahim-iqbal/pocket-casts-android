@@ -133,8 +133,8 @@ private fun TvScaffoldContent(
             .background(
                 Brush.horizontalGradient(
                     colors = listOf(
-                        TvColors.DarkGray,
-                        TvColors.Dark,
+                        TvColors.BackgroundBase,
+                        TvColors.BackgroundSunken,
                     ),
                 ),
             ),
