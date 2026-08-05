@@ -78,7 +78,10 @@ private fun TvFolderDetailContent(
         modifier = modifier,
     ) { state ->
         when (state) {
-            is TvFolderDetailUiState.Loading -> LoadingView(color = MaterialTheme.tvColors.textPrimary, modifier = Modifier.fillMaxSize())
+            is TvFolderDetailUiState.Loading -> LoadingView(
+                color = MaterialTheme.tvColors.textPrimary,
+                modifier = Modifier.fillMaxSize(),
+            )
 
             is TvFolderDetailUiState.Empty -> TvEmptyState(
                 title = stringResource(LR.string.podcasts_empty_folder),
